@@ -1,0 +1,11 @@
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Usuario: <%= @user.name%>  </h1>
+    <div>
+      <ul class="pager">
+        <li><%= link_to 'Volver', users_index_path , class:"btn btn-info", :style=>'color:black;' %></li>
+      </ul>
+    </div>
+  </div>
+</div>

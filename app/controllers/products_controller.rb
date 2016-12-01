@@ -1,30 +1,26 @@
 class ProductsController < ApplicationController
 
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
-   
-  # GET /products
-  # GET /products.json
+  load_and_authorize_resource
   def index
     @products = Product.all
+
+
   end
 
-  # GET /products/1
-  # GET /products/1.json
   def show
+
   end
 
-  # GET /products/new
   def new
     @product = Product.new
+
   end
 
-  # GET /products/1/edit
   def edit
+
   end
 
-  # POST /products
-  # POST /products.json
   def create
     @product = Product.new(product_params)
 
@@ -39,8 +35,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -53,8 +47,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
   def destroy
     @product.destroy
     respond_to do |format|
