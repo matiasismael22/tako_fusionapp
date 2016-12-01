@@ -5,6 +5,7 @@
 	-webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     border-radius: 40px;
+    color: white;
 
 }
 .CarritoCompra h3 {
@@ -19,7 +20,7 @@
 
 .Derecha{
 	padding: 25px;
-	background-color: black;
+	/*background-color: black;*/
 	opacity: 0.9;
 	-webkit-border-radius: 40px;
     -moz-border-radius: 40px;
@@ -27,9 +28,12 @@
 
 }
 .hola{
-	background-color: black;
+	/*background-color: black;*/
 	margin-left: 10px;
 	margin-right: 10px;
-
-
+}
+.piedepagina{
+	background-color: black;
+	color: white;
+	padding: 40px
 }
