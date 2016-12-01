@@ -1,11 +1,14 @@
 <div class="row">
-
-  <div class="col-md-6 col-md-offset-3">
-    <h1>Usuario: <%= @user.name%>  </h1>
+  <div class="col-sm-8 col-md-offset-3">
     <div>
-      <ul class="pager">
-        <li><%= link_to 'Volver', users_index_path , class:"btn btn-info", :style=>'color:black;' %></li>
-      </ul>
+      <h1>Ingrediente</h1>
+      <p id="notice"><%= notice %></p>
+
+      <p>Mail: <%= @user.email %></p>
+      <p>Creado en: <%= @user.created_at %></p>
+
+      <%= link_to 'Editar', user_edit_path(@user) %> |
+      <%= link_to 'Volver', users_index_path %>
     </div>
   </div>
 </div>
