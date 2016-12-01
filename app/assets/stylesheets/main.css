@@ -132,7 +132,7 @@ section::before,section::after {
     top:-5px;
 }
 .navbar-nav>li:nth-child(3) {
-    margin-right: 110px;
+    margin-right: 0px;
 }
 
 
@@ -416,9 +416,9 @@ section::before,section::after {
     10. Footer 
 ========================================================================== */
 .dark-wrapper {
-    background:#ed0121;
-    color:white;
-    font-size:20px;
+    background:black !important;
+    color:white !important;
+    font-size:40px;
     font-weight:bold;
 }
 .dark-wrapper .ss-style-top::before {
