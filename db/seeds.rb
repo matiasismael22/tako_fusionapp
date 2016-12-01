@@ -22,12 +22,12 @@ ActiveRecord::Base.connection.reset_pk_sequence!('users')
    #               ])
 # Perfiles
 Profile.create([
-                   {:id => 1, :name => 'Administrador', :description => 'Administrador' },
-                   {:id => 2, :name => 'Usuario', :description => 'Usuario' }# 1 La última línea no lleva coma
+                  #{:id => 1, :name => 'Administrador', :description => 'Administrador' },
+                  #{:id => 2, :name => 'Usuario', :description => 'Usuario' }# 1 La última línea no lleva coma
                ])
 
 # Usuarios
 User.create([
-                { :email => 'admin@takofusion.cl', :password => 123456789, :name => 'Administrador', :profile_id => 1  },
-                { :email => 'userprueba@takofusion.cl', :password => 123456789, :name => 'Usuario Prueba', :profile_id => 2}# 1
+                #{ :email => 'admin@takofusion.cl', :password => 123456789, :name => 'Administrador', :profile_id => 1  },
+                #{ :email => 'userprueba@takofusion.cl', :password => 123456789, :name => 'Usuario Prueba', :profile_id => 2}# 1
             ])
