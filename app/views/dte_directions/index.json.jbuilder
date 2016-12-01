@@ -1,0 +1,1 @@
+json.array! @dte_directions, partial: 'dte_directions/dte_direction', as: :dte_direction

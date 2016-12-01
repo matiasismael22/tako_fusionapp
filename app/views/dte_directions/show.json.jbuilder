@@ -1,0 +1,1 @@
+json.partial! "dte_directions/dte_direction", dte_direction: @dte_direction

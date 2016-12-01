@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dte Directions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Direction</th>
+      <th>User</th>
+      <th>Direction</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dte_directions.each do |dte_direction| %>
+      <tr>
+        <td><%= dte_direction.direction %></td>
+        <td><%= dte_direction.user %></td>
+        <td><%= dte_direction.direction %></td>
+        <td><%= link_to 'Show', dte_direction %></td>
+        <td><%= link_to 'Edit', edit_dte_direction_path(dte_direction) %></td>
+        <td><%= link_to 'Destroy', dte_direction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dte Direction', new_dte_direction_path %>

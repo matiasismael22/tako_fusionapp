@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TakoFusionapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+     <script src="assets/javascripts/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+
+  <body>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div id="menu" role="navigation">
+        <div class="container">
+            <div class="navbar-header visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><h2>Tako Fusion</h2></a>
+            </div><!-- navbar-header -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li> <%= link_to 'Inicio', root_path %> </li>
+                <li> <%= link_to 'Nosotros', page_about_path %> </li>
+                <li> <%= link_to 'Contacto', page_contact_path %> </li>
+                <li> <%= link_to 'Delivery', products_path %> </li>
+  
+                <!--fix for scroll spy active menu element-->
+                <li style="display:none;"><a href="#header"></a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+         <% if user_signed_in? %>
+            <li> <a href=""><%= current_user.email %></a></li> 
+            <%if current_user.image.present?%>
+             <li> <a href=""><%= image_tag(current_user.image,size: "25")%></a> </li> 
+               <%end%>
+              <li><%= link_to 'Desconectar', destroy_user_session_path, method: :delete%></li> 
+             <%else%>
+            <li><%= link_to 'Iniciar Sesion', new_user_session_path%></li> 
+            <li><%= link_to 'Registrar', new_user_registration_path%></li>
+             <%end%> 
+      </ul>
+        </div><!--/.navbar-collapse -->
+        </div><!-- container -->
+    </div><!-- menu nav bar -->
+</nav>
+<div id="main_wrap">
+   <div id="header">
+        <div class="bg-overlay"></div>
+        <div class="center text-center">
+            <div class="banner">
+              <%= image_tag("logo2.png", style: 'max-height: 20%; max-width: 20%;' ) %>
+            </div>
+            <div class="subtitle"><h4>La mejor fusión Peruano-Oriental</h4></div>
+        </div>
+     </div>
+
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9">
+    <div class="Derecha">
+      <%= yield %>
+  </div>
+    </div>
+    <div class="col-md-3">
+    <div class="CarritoCompra" id="carrito">
+   
+    <br>
+    <h3> Carrito de Compra</h3>
+
+      <%if session[:cart] == nil %> 
+        <p>No hay productos en el carro </p>
+      <%else%>
+        <%session[:cart].each do |prod|%> 
+           <button id="delete"  class="btn btn-warning" type="button" data-id="<%= prod['id']%>"> x</button>
+          <%= image_tag prod["image"], style: 'max-height: 50%; max-width: 50%;' %>
+          <p>Nombre: <%= prod["title"]%></p> 
+          <p>Precio: <%= prod["price"]%></p> 
+          <p>Cantidad: <%= prod["quantity"]%></p>
+         
+        <% end%> 
+      
+      <% end %> 
+   </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function(){
+
+  $("button#add").click(function(){
+    var id = $(this).data("id");
+    $.ajax({
+         url:'http://localhost:3000/cart/add',
+         method: 'POST',
+         data: {
+            id:id
+         },
+         dataType: 'json',
+         beforeSend: function (xhr) {       
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));   
+         console.log($('meta[name="csrf-token"]').attr('content'));         
+         },
+         success: function (data) {
+          var str ="";
+             $.each(data.carrito,function(index,item){
+              str += '<p>< %= image_tag prod["image"], style: "max-height: 20%; max-width: 20%;" %></p>'+item.image+'<P>nombre: ' + item.title + '</P><P>nombre: ' + item.price + '</P><P>nombre: ' + item.quantity + '</P>'+'<button id="delete"  class="btn btn-warning" type="button" data-id="'+ item.id +'"> x</button>';
+             console.log(item);  
+             }); 
+          $("#carrito").html(str);
+         },
+         error: function (xhr) {          
+          console.log(xhr);
+         }
+     });
+  });
+  $('div#carrito').on('click', 'button#delete', function() {
+    var id = $(this).data("id");
+    $.ajax({
+         url:'http://localhost:3000/cart/delete',
+         method: 'POST',
+         data: {
+            id:id
+         },
+         dataType: 'json',
+         beforeSend: function (xhr) {
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+         console.log($('meta[name="csrf-token"]').attr('content'));
+         },
+         success: function (data) {
+          var str ="";
+             $.each(data.carrito,function(index,item){
+
+               if (item.quantity == 0){
+                 str = '<p>No hay productos en el carro </p>'
+               }else {
+                 str += ' <P>nombre: ' + item.title + '</P><P>nombre: ' + item.price + '</P><P>nombre: ' + item.quantity + '</P>'+'<button id="delete"  class="btn btn-warning" type="button" data-id="'+ item.id +'"> x</button>';
+               }
+             console.log(item);
+             });
+          $("#carrito").html(str);
+         },
+         error: function (xhr) {
+          console.log(xhr);
+         }
+     });
+  });
+});
+</script>
+    <%config.serve_static_assets = true %>
+    <script src="assets/javascripts/jquery-2.1.3.min.js"></script>
+    <script src="assets/javascripts/jquery.actual.min.js"></script>
+    <script src="assets/javascripts/jquery.scrollTo.min.js"></script>
+    <script src="assets/javascripts/main.js"></script>
+  </body>
+</html>

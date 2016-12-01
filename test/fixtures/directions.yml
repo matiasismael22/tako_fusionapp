@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  direction_name: MyString
+  number: 1
+  reference: MyString
+
+two:
+  direction_name: MyString
+  number: 1
+  reference: MyString
