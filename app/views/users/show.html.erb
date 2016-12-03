@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-8 col-md-offset-3">
+    <div>
+      <h1>Ingrediente</h1>
+      <p id="notice"><%= notice %></p>
+
+      <p>Mail: <%= @user.email %></p>
+      <p>Creado en: <%= @user.created_at %></p>
+
+      <%= link_to 'Editar', user_edit_path(@user) %> |
+      <%= link_to 'Volver', users_index_path %>
+    </div>
+  </div>
+</div>

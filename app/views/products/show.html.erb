@@ -1,26 +1,18 @@
 <p id="notice"><%= notice %></p>
 
- <%= image_tag @product.image.url(:medium) %>
-<p>
+ <%= image_tag @product.image.url(:medium), class:"img-rounded" %>
+
   <strong>Nombre Promo:</strong>
   <%= @product.title %>
-</p>
-
-<p>
+  <br>
   <strong>Precio:</strong>
   <%= @product.price %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <br>
+  <strong>Descripción:</strong>
   <%= @product.description %>
-</p>
-
-
-
-<p>
-  <strong>Category:</strong>
+  <br>
+  <strong>Categoria:</strong>
   <%= @product.category %>
-</p>
+  <br>
 
 <%= link_to 'Volver', products_path %>

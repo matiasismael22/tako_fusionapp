@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Editar Usuario</h1>
+    <% if flash[:notice] %>
+      <div class="alert alert-info">
+        <button id="notice" type="button" class="close" data-dismiss="alert">&times;</button>            <%=flash[:notice]%>
+      </div>
+    <%end%>
+
+
+    <%= form_for @user  do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <%= f.label :email ,'Email' %>
+        <%= f.text_field :email %>
+      </div>
+      <div>
+        <%= f.label :password ,'Contraseña' %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> Caracteres mínimos)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+      <div>
+        <%= f.label :password_confirmation, "Confirmar Contraseña" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+      <br/>
+      <div>
+        <%= f.submit "Actualizar Usuario", class:"btn btn-primary" %>
+      </div>
+      <br/>
+      <div>
+        <ul class="pager">
+          <li><%= link_to 'Volver', users_index_path, class:"btn btn-info", :style=>'color:black;' %></li>
+        </ul>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
